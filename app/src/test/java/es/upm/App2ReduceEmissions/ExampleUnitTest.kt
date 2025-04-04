@@ -1,4 +1,4 @@
-package com.example.helloworld
+package es.upm.App2ReduceEmissions
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.helloworld
+package es.upm.App2ReduceEmissions
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
