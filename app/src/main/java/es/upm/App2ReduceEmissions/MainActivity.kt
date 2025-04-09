@@ -30,6 +30,20 @@ class MainActivity : AppCompatActivity(), LocationListener {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        val buttonOsm: Button = findViewById(R.id.osmButton)
+        buttonOsm.setOnClickListener {
+            if (latestLocation != null) {
+                val intent = Intent(this, OpenStreetMapsActivity::class.java)
+                val bundle = Bundle()
+                bundle.putParcelable("location", latestLocation)
+                intent.putExtra("locationBundle", bundle)
+                startActivity(intent)
+            }else{
+                Log.e(TAG, "Location not set yet.")
+            }
+        }
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
         Log.d(TAG, "onCreate: The activity is being created.")
         val buttonNext: Button = findViewById(R.id.mainViewSecondButton)
         buttonNext.setOnClickListener {
