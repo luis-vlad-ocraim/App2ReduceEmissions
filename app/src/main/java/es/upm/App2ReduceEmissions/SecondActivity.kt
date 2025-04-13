@@ -5,11 +5,14 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.helloworld.R
+import java.io.IOException
+
 
 class SecondActivity : AppCompatActivity() {
     private val TAG = "btaSecondActivity"
@@ -45,5 +48,24 @@ class SecondActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Display the file contents
+        val tvFileContents: TextView = findViewById(R.id.tvFileContents)
+        tvFileContents.text = readFileContents()
     }
+
+    private fun readFileContents(): String {
+        val fileName = "gps_coordinates.csv"
+        return try {
+            // Open the file from internal storage
+            openFileInput(fileName).bufferedReader().useLines { lines ->
+                lines.fold("") { some, text ->
+                    "$some\n$text"
+                }
+            }
+        } catch (e: IOException) {
+            "Error reading file: ${e.message}"
+        }
+    }
+
 }
